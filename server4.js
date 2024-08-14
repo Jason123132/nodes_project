@@ -4,8 +4,12 @@ const fs = require('fs');
 const session = require('express-session');
 
 const app = express();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// 设置静态资源目录
+app.use(express.static(__dirname)); 
 
 app.use(session({
     secret: 'your_secret_key', // 替换为您的密钥
