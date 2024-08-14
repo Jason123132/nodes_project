@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Available Pets</title>
+</head>
+
+	<style>
+        body {
+            background-image: url('/images/background.jpg.avif'); 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed;
+            background-position: center;
+            color: #333; 
+            font-family: Arial, sans-serif;
+        }
+    </style>
+<body>
+    <header>
+        <h1>Available Pets</h1>
+    </header>
+
+    <main>
+        <% if (pets && pets.length > 0) { %>
+            <ul>
+                <% pets.forEach(pet => { %>
+                    <li>
+                        <h3><%= pet.petName %> - <%= pet.petType %></h3>
+                        <p><strong>Age:</strong> <%= pet.petAge %></p>
+                        <p><strong>Gender:</strong> <%= pet.petGender %></p>
+                        <p><strong>Description:</strong> <%= pet.petDescription %></p>
+                        <p><strong>Owner:</strong> <%= pet.ownerName %></p>
+                        <p><strong>Contact:</strong> <%= pet.ownerEmail %></p>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No pets available at the moment.</p>
+        <% } %>
+    </main>
+</body>
+</html>

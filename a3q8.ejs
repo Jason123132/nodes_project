@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+
+		<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	
+	 <meta charset="UTF-8">
+	
+	<style>
+		* {
+  box-sizing: border-box;
+}
+		.header{
+		
+		color:green;
+		padding:15px;
+			width:100%;
+	}
+		body{
+			height: 100%;
+		}
+		body {
+            background-image: url('/images/fbackground.webp'); 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed;
+            background-position: center;
+            color: #333; 
+            font-family: Arial, sans-serif;
+        }
+		.menu ul{
+			list-style-type: none;
+			margin: 5px;
+			padding: 0;
+			
+			
+		}
+		.menu li{
+			background-color: lawngreen;
+			color: beige;
+			padding: 8px;
+  margin-bottom: 7px;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		}
+		.nav-link{ 
+			text-decoration: none;
+			color:black;
+		}
+		.menu li:hover{
+		background-color: #0099cc;
+	}
+		
+		[class*="col-"] {
+  float: left;
+  
+			width: 100%;
+}
+		/* main-content */
+		.main-content{
+			background-color: aqua
+		}
+		section{
+			display:none;	
+		}
+		section:target {
+    display: block !important;
+		}
+		input,select{
+			background-color:beige;
+		}
+		
+		.statement{
+			background-color: orangered;
+			color: aliceblue;
+			margin-top: 100px;
+		}
+		
+		
+		
+		@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;} 
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;} 
+}
+		
+	
+		
+	.main-content::after{
+			content: "";
+  clear: both;
+  display: table;
+		}
+		#date-time{
+		border: 2px solid green;
+			border-radius: 5px;
+			color:darkgreen;
+			text-align: center;
+	}
+
+		
+	</style>
+	<title>Adopt A-Cat/Dog</title>
+	
+  <script>
+        
+        function updateTime() {
+            const now = new Date();
+            const formattedTime = now.toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            document.getElementById('date-time').innerHTML = formattedTime;
+        }
+
+        
+        window.onload = function() {
+            updateTime(); 
+            setInterval(updateTime, 1000); 
+        };
+
+        
+        function validateForm(event) {
+            event.preventDefault(); 
+            let form = document.forms['find-form'];
+            let isValid = true; 
+            let errorDiv = document.getElementById('form-error'); 
+            errorDiv.innerHTML = ''; 
+            errorDiv.style.display = 'none'; 
+
+            
+            for (let element of form.elements) {
+                if ((element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA') && element.required) {
+                    if (element.value.trim() === '') {
+                        errorDiv.innerHTML += `<p>${element.name} is required</p>`;
+                        errorDiv.style.display = 'block';
+                        isValid = false;
+                    }
+                }
+            }
+
+            
+            let email = form['owner-email'];
+            if (email && email.value) {
+                let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (!emailPattern.test(email.value)) {
+                    errorDiv.innerHTML += '<p>Invalid email format</p>';
+                    errorDiv.style.display = 'block';
+                    isValid = false;
+                }
+            }
+
+        
+            if (isValid) {
+                form.submit();
+            }
+        }
+	  
+	   const urlParams = new URLSearchParams(window.location.search);
+    const loginRequired = urlParams.get('loginRequired');
+
+    if (loginRequired) {
+        alert('Please log in first to browse your pets.'); // 弹窗提示用户登录
+        window.location.href = '/'; // 重定向回主页或登录页面
+    }
+	  
+    </script>
+</head>
+			<body>
+				
+				<!-- 新部分-->	
+			<%- include('header') %>
+				
+				<div class="sidebar">
+					<div class="col-6 col-s-6 menu">
+						<ul>
+							<li><a href="#user" class="nav-link">User register@login</a>
+							<li><a href="#home" class="nav-link">Home Page</a></li>
+							
+							<li><a href="/browse-my-pets" class="nav-link">Browse Available Pets</a></li>
+							
+							<li><a href="#find" class="nav-link">Find a Dog/Cat</a></li>
+							
+							<li><a href="#dog" class="nav-link">Dog Care</a></li>
+							
+							<li><a href="#cat" class="nav-link">Cat Care</a></li>
+							
+							<li><a href="/have-pet" class="nav-link">Have a Pet to Give Away</a></li>
+							
+							<li><a href="#contact" class="nav-link">Contact Us</a></li>
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="main-content">
+					<div class="col-6 col-s-8">
+						
+						<section id="user">
+							
+							
+							
+  <h2>User Authentication</h2>
+ 
+    <% if (!username) { %>
+							<p>
+								 A username can contain letters (both upper and lower case) and digits only. 
+								<br>
+								<br>
+								A password must be at least 4 characters long (characters are to be letters and digits only), have at least one letter and at least one digit.
+							</p>
+        <form action="/auth" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login/Register</button>
+        </form>
+					  <% } %>		
+								 <% if (username) { %>
+							<form action="/logout" method="post">
+        <p>Welcome, <%= username %>!</p>
+        <a href="/logout"><button type="button">Logout</button></a>
+							</form>
+							
+    <% } %>
+   
+
+        <% if (message) { %>
+            <p style="color: green; font-size:30px;font-weight:bold;"><%= message %></p>
+        <% } %>
+							
+					
+</section>
+					<section id="home">
+            <h2>Welcome to Adopt A-Cat/Dog</h2>
+            <p>Find your perfect furry companion! We help connect loving homes with cats and dogs in need of adoption.</p>
+					</section>
+					
+					
+				
+						
+					 <section id="find">
+            <h2>Find a Dog/Cat</h2>
+						 <div id="form-error" class="error" style="display: none;"></div>
+         
+			 <form action="/have-pet" method="post" onsubmit="validateFindForm(event)">
+                <label>
+                    Cat or dog:
+                    <select name="pet-type" required>
+						<option value="" disabled selected>Select an option</option>
+                        <option value="cat">Cat</option>
+                        <option value="dog">Dog</option>
+                    </select>
+                </label>
+                <br>
+				<br>
+                <label>
+                    Breed:
+                    <input type="text" name="breed" required>
+                </label>
+                <br>
+				<br>
+                <label>
+                    Preferred age:
+                    <select name="age" required>
+						<option value="" disabled selected>Select an option</option>
+                        <option value="puppy-kitten">Puppy/Kitten</option>
+                        <option value="young">Young</option>
+                        <option value="adult">Adult</option>
+                        <option value="senior">Senior</option>
+                        <option value="any">Doesn't matter</option>
+                    </select>
+                </label>
+                <br>
+				<br>
+                <label>
+                    Preferred gender:
+                    <select name="gender" required>
+						<option value="" disabled selected>Select an option</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="any">Doesn't matter</option>
+                    </select>
+                </label>
+                <br>
+				<br>
+                <label>
+                    <input type="checkbox" name="good-with-dogs"> Gets along with other dogs
+                </label>
+                <br>
+				<br>
+                <label>
+                    <input type="checkbox" name="good-with-cats"> Gets along with other cats
+                </label>
+                <br>
+				<br>
+                <label>
+                    <input type="checkbox" name="good-with-children"> Good with small children
+                </label>
+                <br>
+				<br>
+                <input type="submit" value="Submit">
+				<br>
+				<br>
+                <input type="reset" value="Clear">
+            </form>
+        </section>
+					
+					
+        <section id="dog">
+            <h2>Dog Care</h2>
+            
+				<ol type="1">
+					<li>High-Quality Food: Provide a balanced diet with high-quality dog food that meets your dog’s age, size, and health needs.</li>
+					<li>Regular Feeding Schedule: Feed your dog at the same times each day, typically twice daily.</li>
+					<li>Daily Exercise: Dogs need regular physical activity; take them for walks, play fetch, or let them run in a safe area.</li>
+				</ol>
+        </section>
+
+        <section id="cat">
+            <h2>Cat Care</h2>
+            
+				<ol type="1">
+					<li>	High-Quality Food: Provide balanced cat food suitable for your cat’s age, size, and health conditions.</li>
+					<li>Regular Feeding Schedule: Feed your cat at the same times each day, usually once or twice daily.</li>
+					<li>Scratching Posts: Provide scratching posts to keep their claws healthy and prevent destructive scratching.</li>
+				</ol>
+        </section>
+
+       
+        <section id="contact">
+            <h2>Contact Us</h2>
+			
+            <p>For any inquiries, please contact us at: 
+				name:Zihao Guo
+				student id:40232418
+				email:gu_zihao@concordia.ca</p>
+			
+        </section>
+			
+						
+						
+					</div>
+			</div>
+			<%- include('footer') %>
+				
+					
+			</body>
+</html>

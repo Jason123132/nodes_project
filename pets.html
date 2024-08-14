@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="UTF-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .header {
+            background-color: aqua;
+            color: #ffffff;
+            padding: 15px;
+            width: 100%;
+        }
+        body {
+            background-color: beige;
+            height: 100%;
+        }
+        .menu ul {
+            list-style-type: none;
+            margin: 5px;
+            padding: 0;
+        }
+        .menu li {
+            background-color: lawngreen;
+            color: beige;
+            padding:7px;
+            margin-bottom: 6px;
+            
+        }
+        .nav-link {
+            text-decoration: none;
+            color: black;
+        }
+        .menu li:hover {
+            background-color: #0099cc;
+        }
+        [class*="col-"] {
+            float: left;
+            width: 100%;
+        }
+        .main-content {
+            background-color: aqua;
+        }
+        .pet {
+            border: 2px solid #0099cc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .pet img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 10px;
+        }
+        .pet-info {
+            display: flex;
+            align-items: center;
+        }
+        .interested {
+            background-color: #0099cc;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+		.interested:hover{
+			background-color: lightgreen;
+		}
+    </style>
+    <title>Browse Available Pets</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Browse Available Pets</h1>
+    </div>
+    <div class="main-content">
+        <div class="col-6 col-s-8">
+            <div class="pet">
+                <div class="pet-info">
+                    <img src="images/cat.webp" alt="Cat 1">
+                    <div>
+                        <h3>Jerry</h3>
+                        <p>Breed: Persian</p>
+                        <p>Age: 2 years</p>
+                        <p>Gender: Female</p>
+                    </div>
+                    <button class="interested">Interested</button>
+                </div>
+            </div>
+            <div class="pet">
+                <div class="pet-info">
+                    <img src="images/dog.webp" alt="Dog 1">
+                    <div>
+                        <h3>Hiroshi</h3>
+                        <p>Breed: Labrador</p>
+                        <p>Age: 3 years</p>
+                        <p>Gender: Male</p>
+                    </div>
+                    <button class="interested">Interested</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

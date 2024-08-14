@@ -1,0 +1,64 @@
+<style>
+	#username-display {
+            color: blue; 
+            font-weight: bold;
+        }
+
+        
+       
+	/* 11*/
+		/* 11*/
+	#button{
+		width:100px;
+		height:50px;
+		border:3px dotted brown;
+		border-radius: 10px;
+		font-size:30px;
+	}
+
+        #button:hover {
+            background-color: #ddd; /* 悬停时的背景颜色 */
+        }
+</style>
+<dic class="header">
+    <h1>Adopt A-Cat/Dog</h1>
+    <a href="/" id="logo-link">
+        <img src="/images/logo.png" width="100" height="80" alt="Cat logo">
+    </a>
+	<form action="/logout" method="get">
+        <p>Welcome, customers!</p>
+		  <% if (!username) { %>
+        <a href="/logout"><button type="button" id="button">Logout</button></a>
+							</form>
+	    <% } %>
+    <div id="date-time"></div>
+	
+	  <% if (username) { %>
+            
+            <!-- 添加一个登出按钮 -->
+            <form action="/logout" method="GET" style="color:black">
+                <button type="submit" id="button">Logout</button>
+            </form>
+        <% } %>
+</div>
+
+<script>
+    function updateTime() {
+        const now = new Date();
+        const formattedTime = now.toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        document.getElementById('date-time').innerHTML = formattedTime;
+    }
+
+    window.onload = function() {
+        updateTime();
+        setInterval(updateTime, 1000);
+    };
+</script>
