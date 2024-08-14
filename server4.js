@@ -19,7 +19,7 @@ const petsFilePath = './pets.json';
 
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname));
 
 function getPets() {
     let pets = [];
